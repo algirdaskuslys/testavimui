@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="header">
+    <meta charset="UTF-8">
+    <title>Fragments-header</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 250px;
+            margin: 70px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .container-info {
+            width: 250px;
+            margin-bottom: 15px;
+            margin-top: 70px;
+            margin-left: 620px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .calculateContainer {
+            width: 50%;
+            margin-bottom: 15px;
+            margin-top: 70px;
+            margin-left: 360px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .usersContainer {
+            width: 600px;
+            margin-bottom: 15px;
+            margin-top: 70px;
+            margin-left: 450px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .tableContainer {
+            margin-top: 70px;
+            margin-bottom: 15px;
+            margin-left: 135px;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tableContainer form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .tableContainer form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            text-size: 15px;
+            color: red;
+            text-align: center;
+        }
+
+        .container input[type="text"],
+        .container input[type="email"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            box-sizing: border-box;
+            margin-top: 4px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid black;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #292929;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid black;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: gray;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-calculate {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid black;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #292929;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-update {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid black;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #292929;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .container form button[type="submit"]:hover {
+            color: black;
+            background-color: white;
+            transition: background-color 0.4s ease;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .error-message-login {
+            color: red;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px;
+            width: 100px;
+            margin-bottom: 70px;
+            border: 0;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #9D6A89;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #401F3E;
+            color: #fff;
+        }
+
+        .btn2 {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            border: 0;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #9D6A89;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn2:hover {
+            background-color: #401F3E;
+            color: #fff;
+        }
+
+        .btn3 {
+            padding: 10px;
+            width: 100px;
+            margin-left: 720px;
+            border: 0;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #9D6A89;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn3:hover {
+            background-color: #401F3E;
+            color: #fff;
+        }
+
+        .nav-btn {
+            padding: 10px;
+            border: 1px solid darkcyan;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #9D6A89;
+            color: #fff;
+            margin-top: 13.5px;
+            margin-right: -4px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #401F3E;
+            color: #fff;
+        }
+
+        .nav-btn2 {
+            padding: 10px;
+            border: 1px solid darkcyan;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #9D6A89;
+            color: #fff;
+            margin-top: 13.5px;
+            cursor: pointer;
+        }
+
+        .nav-btn2:hover {
+            background-color: #401F3E;
+            color: #fff;
+        }
+
+        .nav-btn3 {
+            padding: 10px;
+            border: 1px solid darkcyan;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #9D6A89;
+            color: #fff;
+            margin-top: 13.5px;
+            cursor: pointer;
+        }
+
+        .nav-btn3:hover {
+            background-color: #401F3E;
+            color: #fff;
+        }
+
+        .input-field {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .input-field label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 12px;
+        }
+
+        .input-field input[type="number"],
+        .input-field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e2e6ea;
+        }
+
+        .user-info {
+            text-align: end;
+            color: white;
+            margin-top: 14px;
+            margin-right: 110px;
+        }
+
+        ol, ul {
+            margin-bottom: 2px;
+            margin-top: -43px;
+        }
+
+        .div-label {
+            margin-bottom: 25px;
+            margin-top: 12px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            background-color: transparent;
+        }
+
+        .a-pipe {
+            text-decoration: none;
+            color: black;
+            background-color: transparent;
+        }
+
+        a:hover, a:active {
+            color: inherit;
+            background-color: transparent;
+        }
+
+        .navbar {
+            height: 50px;
+            background-color: darkcyan;
+            padding: 5px;
+            margin-top: -15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            margin-top: -51px;
+            margin-bottom: -51px;
+            display: inline-flex;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-right {
+            margin-right: 10px;
+            text-align: end;
+            margin-bottom: -51px;
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+            width: 25%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container {
+            width: 25%;
+            }
+        }
+
+    </style>
+    <body style="background-color: aliceblue;"></body>
+</div>
+</html>

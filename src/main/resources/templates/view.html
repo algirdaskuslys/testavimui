@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Number</title>
+    <script src="https://kit.fontawesome.com/115c94f159.js" crossorigin="anonymous"></script>
+    <div th:replace="fragments-header :: header"></div>
+</head>
+<body>
+<nav class="navbar">
+    <div class="user-info" th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Username: ' + ${#authentication.principal.username}"></span>
+        <br>
+        <span th:text="'Role: '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
+    </div>
+    <div class="nav-left">
+        <form th:action="@{/calculator}" method="get">
+            <button class="nav-btn" type="submit">Calculator</button>
+        </form>
+        <form th:action="@{/numbers}" method="get">
+            <button class="nav-btn" type="submit">Calculations</button>
+        </form>
+        <form th:action="@{/users}" method="get"
+              th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+            <button class="nav-btn2" type="submit">Registered Users</button>
+        </form>
+    </div>
+    <div class="nav-right">
+        <form th:action="@{/logout}" method="post">
+            <button class="nav-btn3" type="submit"><i class="fa-solid fa-person-walking-arrow-right"></i> Sign out
+            </button>
+        </form>
+    </div>
+</nav>
+<div class="container-info">
+    <div class="table-responsive">
+        <caption><b>Number information</b></caption>
+        <table class="table table-striped">
+            <tr th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+                <td><b>Id:</b></td>
+                <td th:text="${number.id}"></td>
+            </tr>
+            <tr>
+                <td><b>First number:</b></td>
+                <td th:text="${number.number1}"></td>
+            </tr>
+            <tr>
+                <td><b>Operation:</b></td>
+                <td th:text="${number.operation}"></td>
+            </tr>
+            <tr>
+                <td><b>Second number:</b></td>
+                <td th:text="${number.number2}"></td>
+            </tr>
+            <tr>
+                <td><b>Result:</b></td>
+                <td th:text="${number.result}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="btn-container">
+    <button type="button" class="btn" onclick="history.back()">Back</button>
+</div>
+<th:block th:replace="fragments-footer :: footer"></th:block>
+</body>
+</html>

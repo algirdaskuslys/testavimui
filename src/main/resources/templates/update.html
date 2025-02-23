@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Number</title>
+    <script src="https://kit.fontawesome.com/115c94f159.js" crossorigin="anonymous"></script>
+    <div th:replace="fragments-header :: header"></div>
+</head>
+<body>
+<nav class="navbar">
+    <div class="user-info" th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Username: ' + ${#authentication.principal.username}"></span>
+        <br>
+        <span th:text="'Role: '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
+    </div>
+    <div class="nav-left">
+        <form th:action="@{/calculator}" method="get">
+            <button class="nav-btn" type="submit">Calculator</button>
+        </form>
+        <form th:action="@{/numbers}" method="get">
+            <button class="nav-btn" type="submit">Calculations</button>
+        </form>
+        <form th:action="@{/users}" method="get"
+              th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+            <button class="nav-btn2" type="submit">Registered Users</button>
+        </form>
+    </div>
+    <div class="nav-right">
+        <form th:action="@{/logout}" method="post">
+            <button class="nav-btn3" type="submit"><i class="fa-solid fa-person-walking-arrow-right"></i> Sign out
+            </button>
+        </form>
+    </div>
+</nav>
+<div class="container">
+    <form name="number" th:action="@{/updateNumber}" th:object="${number}" method="post">
+        <input type="hidden" name="id" th:value="${number.id}">
+        <div class="input-field">
+            <label> First number:
+                <input type="number" name="number1" max="999999999" th:value="${number.number1}" required>
+            </label>
+        </div>
+        <div class="input-field">
+            <label> Operation:
+                <input type="text" name="operation" th:value="${number.operation}"
+                       style="text-align: center;" required>
+            </label>
+            <span class="error-message" th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></span>
+        </div>
+        <div class="input-field">
+            <label> Second number:
+                <input type="number" name="number2" max="999999999" th:value="${number.number2}" required>
+            </label>
+        </div>
+        <div class="input-field">
+            <label> Result:
+                <input type="number" name="result" max="999999999" th:value="${number.result}" required>
+            </label>
+        </div>
+        <button type="button" class="btn2" onclick="history.back()">Back</button>
+        <button class="btn-update" type="submit">Update</button>
+    </form>
+</div>
+<th:block th:replace="fragments-footer :: footer"></th:block>
+</body>
+<script>
+    $(function () {
+        $("#number1, #number2, #result").change(function() {
+            var max = parseInt($(this).attr('max'));
+            if ($(this).val() > max) {
+                $(this).val(max);
+            }
+        });
+    });
+</script>
+</html>

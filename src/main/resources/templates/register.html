@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <div th:include="fragments-header :: header"></div>
+</head>
+<body>
+<div class="container">
+    <h2>Register</h2>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div class="div-label">
+            <label> Username:
+                <input type="text" name="username" required>
+                <span class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </label>
+        </div>
+        <div class="div-label">
+            <label class="div-label"> Email:
+                <input type="email" name="email" required>
+                <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </label>
+        </div>
+        <div class="div-label">
+            <label class="div-label"> Password:
+                <input type="password" name="password" required>
+                <span class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </label>
+        </div>
+        <div class="div-label">
+            <label class=""> Confirm password:
+                <input type="password" name="passwordConfirm" required>
+                <span class="error-message" th:if="${#fields.hasErrors('passwordConfirm')}"
+                      th:errors="*{passwordConfirm}"></span>
+            </label>
+        </div>
+        <button class="btn-login" type="submit">Register</button>
+    </form>
+    <div>
+        <form th:action="@{/login}" method="get">
+            <button class="btn-register" type="submit">Back to Login</button>
+        </form>
+    </div>
+</div>
+<th:block th:replace="fragments-footer :: footer"></th:block>
+</body>
+</html>

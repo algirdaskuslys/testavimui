@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <script src="https://kit.fontawesome.com/115c94f159.js" crossorigin="anonymous"></script>
+    <th:block th:replace="fragments-header :: header"></th:block>
+</head>
+<body>
+<nav class="navbar">
+    <div class="user-info" th:each="authority : ${#authentication.principal.authorities}">
+        <span th:text="'Username: ' + ${#authentication.principal.username}"></span>
+        <br>
+        <span th:text="'Role: '"></span>
+        <span th:if="${authority.authority == 'USER'}">USER</span>
+        <span th:if="${authority.authority == 'ADMIN'}">ADMIN</span>
+    </div>
+    <div class="nav-left">
+        <form th:action="@{/calculator}" method="get">
+            <button class="nav-btn" type="submit">Calculator</button>
+        </form>
+        <form th:action="@{/numbers}" method="get">
+            <button class="nav-btn" type="submit">Calculations</button>
+        </form>
+        <form th:action="@{/users}" method="get"
+              th:if="${#authentication.principal.authorities.?[authority == 'ADMIN'].size() > 0}">
+            <button class="nav-btn2" type="submit">Registered Users</button>
+        </form>
+    </div>
+    <div class="nav-right">
+        <form th:action="@{/logout}" method="post">
+            <button class="nav-btn3" type="submit"><i class="fa-solid fa-person-walking-arrow-right"></i> Sign out
+            </button>
+        </form>
+    </div>
+</nav>
+<div class="container">
+    <h2>Online Calculator</h2>
+    <form method="post" th:action="@{/calculate}" th:object="${number}" autocomplete="off">
+        <div class="input-field">
+            <label> First number:
+                <input type="number" name="number1" max="999999999" required>
+                <span class="error-message" th:if="${#fields.hasErrors('number1')}" th:errors="*{number1}"></span>
+            </label>
+        </div>
+        <div class="input-field">
+            <label> Second number:
+                <input type="number" name="number2" max="999999999" required>
+                <span class="error-message" th:if="${#fields.hasErrors('number2')}" th:errors="*{number2}"></span>
+            </label>
+        </div>
+        <div class="input-field">
+            <label> Operation:
+                <select name="operation" required>
+                    <option value="+">Addition</option>
+                    <option value="-">Subtraction</option>
+                    <option value="*">Multiplication</option>
+                    <option value="/">Division</option>
+                </select>
+            </label>
+        </div>
+        <button class="btn-calculate" type="submit">Calculate</button>
+    </form>
+</div>
+<th:block th:replace="fragments-footer :: footer"></th:block>
+</body>
+<script>
+    $(function () {
+        $("#number1, #number2").change(function() {
+            var max = parseInt($(this).attr('max'));
+            if ($(this).val() > max) {
+                $(this).val(max);
+            }
+        });
+    });
+</script>
+</html>
