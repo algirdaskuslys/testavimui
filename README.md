@@ -1,5 +1,5 @@
 ﻿Internetinis skaičiuotuvas - WEB aplikacija skirta testavimui
-
+ 
 WEB aplikacijos paleidimo žingsniai:
     1. Parsisiųsti ir atsidaryti projektą. Projekto atidarymui rekomenduojama programinė įranga- IntelliJ studija. Parsisiuntimo url adresas: https://www.jetbrains.com/idea/download/#section=windows (naujausia versija)
     2. JDK naudojama versija turi būti 21.
